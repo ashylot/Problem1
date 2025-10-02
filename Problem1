@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+// Parent class
+class Employee {
+    String name;
+    double baseSalary;
+
+    Employee(String name, double baseSalary) {
+        this.name = name;
+        this.baseSalary = baseSalary;
+    }
+
+    double calculateSalary() {
+        return baseSalary;
+    }
+}
+
+// Child class (inherits from Employee)
+class Manager extends Employee {
+    double bonus;
+
+    Manager(String name, double baseSalary, double bonus) {
+        super(name, baseSalary); // calling parent constructor
+        this.bonus = bonus;
+    }
+
+    @Override
+    double calculateSalary() {
+        return baseSalary + bonus;
+    }
+}
+
+public class Problem1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter employee name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter base salary: ");
+        double baseSalary = sc.nextDouble();
+
+        System.out.print("Is the employee a manager? (yes/no): ");
+        String answer = sc.next();
+
+        if (answer.equalsIgnoreCase("yes")) {
+            System.out.print("Enter bonus: ");
+            double bonus = sc.nextDouble();
+            Manager m = new Manager(name, baseSalary, bonus);
+            System.out.println("Total Salary of Manager " + name + ": " + m.calculateSalary());
+        } else {
+            Employee e = new Employee(name, baseSalary);
+            System.out.println("Total Salary of Employee " + name + ": " + e.calculateSalary());
+        }
+
+        sc.close();
+    }
+}
