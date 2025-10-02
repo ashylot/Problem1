@@ -1,0 +1,77 @@
+import java.util.Scanner;
+
+// Parent class
+class Product {
+    String productName;
+    double price;
+
+    Product(String productName, double price) {
+        this.productName = productName;
+        this.price = price;
+    }
+
+    double finalPrice() {
+        return price;
+    }
+}
+
+// Child class 1
+class Electronics extends Product {
+    double warrantyFee;
+
+    Electronics(String productName, double price, double warrantyFee) {
+        super(productName, price);
+        this.warrantyFee = warrantyFee;
+    }
+
+    @Override
+    double finalPrice() {
+        return price + warrantyFee;
+    }
+}
+
+// Child class 2
+class Clothes extends Product {
+    double discount;
+
+    Clothes(String productName, double price, double discount) {
+        super(productName, price);
+        this.discount = discount;
+    }
+
+    @Override
+    double finalPrice() {
+        return price - discount;
+    }
+}
+
+public class Problem2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter product name: ");
+        String productName = sc.nextLine();
+
+        System.out.print("Enter price: ");
+        double price = sc.nextDouble();
+
+        System.out.print("Enter product type (electronics/clothes): ");
+        String type = sc.next();
+
+        if (type.equalsIgnoreCase("electronics")) {
+            System.out.print("Enter warranty fee: ");
+            double warranty = sc.nextDouble();
+            Electronics e = new Electronics(productName, price, warranty);
+            System.out.println("Final price of electronic: " + e.finalPrice());
+        } else if (type.equalsIgnoreCase("clothes")) {
+            System.out.print("Enter discount: ");
+            double discount = sc.nextDouble();
+            Clothes c = new Clothes(productName, price, discount);
+            System.out.println("Final price of clothes: " + c.finalPrice());
+        } else {
+            System.out.println("Invalid product type!");
+        }
+
+        sc.close();
+    }
+}
