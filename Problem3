@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+// Parent class
+class Person {
+    String name;
+
+    Person(String name) {
+        this.name = name;
+    }
+}
+
+// Child class
+class EmployeeInfo extends Person {
+    int employeeID;
+
+    EmployeeInfo(String name, int employeeID) {
+        super(name); // call Person constructor
+        this.employeeID = employeeID;
+    }
+}
+
+// Grandchild class
+class Salary extends EmployeeInfo {
+    double basicSalary;
+    double hra;
+
+    Salary(String name, int employeeID, double basicSalary) {
+        super(name, employeeID);
+        this.basicSalary = basicSalary;
+        this.hra = 0.2 * basicSalary; // 20% HRA
+    }
+
+    double totalSalary() {
+        return basicSalary + hra;
+    }
+
+    void display() {
+        System.out.println("\nName: " + name);
+        System.out.println("Employee ID: " + employeeID);
+        System.out.println("Basic Salary: " + basicSalary);
+        System.out.println("HRA: " + hra);
+        System.out.println("Total Salary: " + totalSalary());
+    }
+}
+
+public class Problem3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Employee ID: ");
+        int id = sc.nextInt();
+
+        System.out.print("Enter Basic Salary: ");
+        double basic = sc.nextDouble();
+
+        Salary s = new Salary(name, id, basic);
+        s.display();
+
+        sc.close();
+    }
+}
